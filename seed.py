@@ -1,10 +1,19 @@
 import model
 import csv
+import os
 
-def load_users(session):
+def load_users():
     # use u.user
-    pass
-
+    # change directory
+    os.chdir("/home/user/src/ratings/seed_data")
+    with open('u.user', 'rb') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            split_row = row[0].split("|")
+            id, age, gender, occupation, zipcode = split_row
+            print split_row            
+load_users()
+    
 def load_movies(session):
     # use u.item
     pass
