@@ -1,0 +1,10 @@
+{% extends "master.html" %}
+{% block body %}
+
+<h1>Reviews</h1>
+{% for rating in tuples_of_ratings %}
+<h2> Rating: {{ rating[0] }}, Movie: {{ rating[1] }} </h2>
+
+{% endfor %}
+
+{% endblock %}
