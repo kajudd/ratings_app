@@ -57,7 +57,7 @@ def load_ratings(session):
 
 def main(session):
     #load_users(session)
-    load_ratings(session)
+    load_users(session)
     # You'll call each of the load_* functions with the session as an argument
     #load_movies(session)
 

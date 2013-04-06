@@ -1,0 +1,11 @@
+{% extends "master.html" %}
+{% block body %}
+
+<h1>Movies</h1>
+{% for movie in movies %}
+<h2> <a href= "/user/{{movie.name}}"> {{ movie.name}} </a>
+ </h2> 
+{% endfor %}
+
+
+{% endblock %}

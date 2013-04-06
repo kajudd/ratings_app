@@ -8,6 +8,7 @@ from sqlalchemy.orm import relationship, backref
 ENGINE = create_engine("sqlite:///ratings.db", echo = False)
 session = scoped_session(sessionmaker(bind=ENGINE, autocommit = False, autoflush = False))
 
+
 Base = declarative_base()
 Base.query = session.query_property()
 
@@ -20,6 +21,8 @@ class User(Base):
 	gender = Column(String(2), nullable = True)
 	occupation = Column(String(64), nullable = True)
 	zipcode = Column(String(15), nullable = True)
+	email = Column(String(200), nullable = True)
+	password = Column(String(64), nullable = True)
 
 class Movies(Base):
 	__tablename__ = "movies"
