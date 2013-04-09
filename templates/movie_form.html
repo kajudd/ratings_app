@@ -1,0 +1,11 @@
+{% extends "master.html" %}
+{% block body %}
+
+<h1>Add your rating for this movie</h1>
+IMDB URL: {{ imdb }}
+<form method = "POST" action = "/commit_review">
+	Rating <input type = "text" name = "rating" </input>
+	<input type = "submit"> 
+</form>
+
+{% endblock %}
