@@ -2,6 +2,7 @@
 {% block body %}
 
 <h1>Users</h1>
+<p><a href="{{ "/reviews" }}">Return to my reviews</a></p>
 {% for user in users %}
 <h2> <a href= "/user/{{user.id}}"> Id {{ user.id }} </a>
  </h2> 

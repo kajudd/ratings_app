@@ -3,13 +3,15 @@
 
 <h1>Sign Up</h1>
 <form method = "POST" action = "/signup_done">
-<!-- 	Age <input type = "text" name = "age" age = "age" </input>
-	Gender <input type = "text" name = "gender" gender = "gender"</input>
-	Occupation <input type = "text" name = "occupation" occupation = "occupation"</input>	
-	Zipcode <input type = "text" name = "zipcode" zipcode = "zipcode"</input> -->
 	Email <input type = "text" name = "email"</input>
 	Password <input type = "text" name = "password"</input>
+	Age <input type = "text" name = "age" age = "age" </input>
+	Gender <input type = "text" name = "gender" gender = "gender"</input>
+	Occupation <input type = "text" name = "occupation" occupation = "occupation"</input>	
+	Zipcode <input type = "text" name = "zipcode" zipcode = "zipcode"</input>
 	<input type = "submit"> 
 </form>
+
+If you have an account <a href="{{ url_for('login') }}">Login</a>
 
 {% endblock %}
