@@ -4,8 +4,10 @@
 <h1>Add your rating for this movie</h1>
 IMDB URL: {{ imdb }}
 <form method = "POST" action = "/commit_review">
-	Rating <input type = "text" name = "rating" </input>
+	Rating <input type = "text" name = "rating"/>
 	<input type = "submit"> 
 </form>
+
+<p>We predict you will rate this movie: {{prediction}}</p>
 
 {% endblock %}

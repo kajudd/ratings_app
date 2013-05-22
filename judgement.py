@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, request, session
 import model
-
+import math
 
 app = Flask(__name__)
 
@@ -72,7 +72,12 @@ def new_rating(id):
     movie = model.session.query(model.Movies).get(id)
     session['movie'] = movie.id 
     imdb = movie.imdb_url
-    return render_template("movie_form.html", imdb = imdb)
+    user_id = session.get("user")
+    user = model.session.query(model.User).get(user_id)
+    prediction = model.User.predict_rating(user, movie)
+    predition = math.round(prediction)
+    return render_template("movie_form.html", imdb=imdb, prediction=prediction)
+
 
 @app.route("/commit_review", methods = ["POST"])
 def commit_review():
@@ -87,11 +92,11 @@ def commit_review():
         users_movies = rating.movie_id
         all_ratings.append(users_movies)
     if movie_id in all_ratings:
-        rating = model.session.query(model.Ratings).filter_by(user_id = user_id, movie_id = movie_id).first()
+        rating = model.session.query(model.Ratings).filter_by(user_id=user_id, movie_id=movie_id).first()
         rating.rating = new_rating
         model.session.commit()
     else:
-        add_rating = model.Ratings(id = None, user_id = user_id, movie_id = movie_id, rating = new_rating)
+        add_rating = model.Ratings(id=None, user_id=user_id, movie_id=movie_id, rating=new_rating)
         model.session.add(add_rating)
         model.session.commit()
     return redirect("/reviews")
@@ -114,17 +119,13 @@ def list_movies(id):
     for rating in user_rating:
         ratings.append(rating.rating)
     tuples_of_ratings = zip(ratings, movie_names)
-    return render_template("other_reviews.html", tuples_of_ratings = tuples_of_ratings)
+    return render_template("other_reviews.html", tuples_of_ratings=tuples_of_ratings)
 
 @app.route('/logout')
 def logout():
     return redirect('/')
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-# user inputs age, gender, occupation zipcode into template
-# commit to database
-# user is assigned id
-# id is printed
 
 
 if __name__ == "__main__":
