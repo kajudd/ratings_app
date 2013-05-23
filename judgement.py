@@ -9,7 +9,7 @@ app = Flask(__name__)
 def signup():
     return render_template("new_user.html")
     
-@app.route("/signup_done", methods = ["POST"])
+@app.route("/signup_done", methods=["POST"])
 def new_user():
     email = request.form['email']
     password = request.form['password']
@@ -25,7 +25,7 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/authenticate", methods = ["POST"])
+@app.route("/authenticate", methods=["POST"])
 def authenticate():
     user_email = request.form['email']
     user_password = request.form['password']
@@ -36,7 +36,8 @@ def authenticate():
     else:
         return redirect("/login")
 
-@app.route("/reviews", methods = ["GET", "POST"])
+
+@app.route("/reviews", methods=["GET", "POST"])
 def user_ratings():
     user = session.get("user")
 
@@ -56,16 +57,17 @@ def user_ratings():
     tuples_of_ratings = zip(ratings, movie_names)
     return render_template("reviews.html", tuples_of_ratings = tuples_of_ratings)
 
+
 @app.route("/add_reviews", methods = ["POST"])
 def add_reviews():
     add = request.form["add_review"]
     return redirect("/movies_list")
 
+
 @app.route("/movies_list", methods = ["GET"])
 def movies_list():
     movies = model.session.query(model.Movies).all()
     return render_template("all_the_movies.html", movies = movies)
-
 
 @app.route("/movie/<int:id>", methods = ["GET", "POST"])
 def new_rating(id):
@@ -75,7 +77,7 @@ def new_rating(id):
     user_id = session.get("user")
     user = model.session.query(model.User).get(user_id)
     prediction = model.User.predict_rating(user, movie)
-    predition = math.round(prediction)
+    prediction = round(prediction)
     return render_template("movie_form.html", imdb=imdb, prediction=prediction)
 
 
